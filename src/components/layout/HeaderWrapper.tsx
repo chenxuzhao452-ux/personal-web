@@ -3,11 +3,7 @@
 import { Header } from './Header';
 import { useTranslation } from '@/components/LanguageProvider';
 
-interface HeaderWrapperProps {
-  siteName: string;
-}
-
-export function HeaderWrapper({ siteName }: HeaderWrapperProps) {
+export function HeaderWrapper() {
   const { t } = useTranslation();
 
   const navItems = [
@@ -17,5 +13,5 @@ export function HeaderWrapper({ siteName }: HeaderWrapperProps) {
     { label: t('nav.contact'), href: '/contact' },
   ];
 
-  return <Header siteName={siteName} navItems={navItems} />;
+  return <Header siteName={t('site.name')} navItems={navItems} />;
 }

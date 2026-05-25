@@ -5,11 +5,10 @@ import { useTranslation } from '@/components/LanguageProvider';
 import styles from './Footer.module.css';
 
 interface FooterProps {
-  siteName: string;
   currentYear: number;
 }
 
-export function Footer({ siteName, currentYear }: FooterProps) {
+export function Footer({ currentYear }: FooterProps) {
   const { t } = useTranslation();
   const pathname = usePathname();
 
@@ -20,7 +19,7 @@ export function Footer({ siteName, currentYear }: FooterProps) {
       <div className={`${styles.inner} container`}>
         <div className={styles.divider} aria-hidden="true" />
         <p className={`${styles.text} mono-label`}>
-          &copy; {currentYear} {siteName}. {t('footer.built')}
+          &copy; {currentYear} {t('site.name')}. {t('footer.built')}
         </p>
       </div>
     </footer>

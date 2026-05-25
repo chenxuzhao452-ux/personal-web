@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  icons: {
+    icon: '/favicon.svg',
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   openGraph: {
     type: 'website',
@@ -63,9 +66,9 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <MotionProvider>
-              <HeaderWrapper siteName={SITE_NAME} />
+              <HeaderWrapper />
               {children}
-              <Footer siteName={SITE_NAME} currentYear={new Date().getFullYear()} />
+              <Footer currentYear={new Date().getFullYear()} />
             </MotionProvider>
           </LanguageProvider>
         </ThemeProvider>
