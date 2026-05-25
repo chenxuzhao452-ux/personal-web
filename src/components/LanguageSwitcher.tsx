@@ -157,6 +157,21 @@ export function LanguageSwitcher() {
           color: var(--color-accent);
           background: rgba(108, 92, 231, 0.08);
         }
+
+        @media (max-width: 768px) {
+          .lang__trigger {
+            height: auto;
+            min-height: 44px;
+            min-width: 44px;
+            padding: var(--space-2) var(--space-3);
+          }
+
+          .lang__option {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+          }
+        }
       `}</style>
     </div>
   );

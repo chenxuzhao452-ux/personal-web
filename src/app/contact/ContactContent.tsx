@@ -100,6 +100,7 @@ export function ContactContent({ socialLinks }: ContactContentProps) {
           position: relative;
           padding: var(--section-padding-y) 0;
           min-height: 100vh;
+          min-height: 100dvh;
         }
 
         .contact-page__layout {

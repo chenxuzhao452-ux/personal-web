@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { cn } from '@/utils';
 import type { NavItem } from '@/types/global';
@@ -13,6 +14,11 @@ interface NavigationProps {
 export function Navigation({ items, className }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -21,6 +27,52 @@ export function Navigation({ items, className }: NavigationProps) {
   const closeMenu = useCallback(() => {
     setIsOpen(false);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
+  const menuOverlay = (
+    <ul
+      id="nav-menu"
+      className={cn('navigation__list', isOpen && 'is-open')}
+      role="menubar"
+    >
+      {items.map((item, index) => (
+        <li key={item.href} role="none">
+          <Link
+            href={item.href}
+            className={cn(
+              'navigation__link',
+              activeIndex === index && 'is-active'
+            )}
+            role="menuitem"
+            onClick={closeMenu}
+            onFocus={() => setActiveIndex(index)}
+            onBlur={() => setActiveIndex(null)}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+          >
+            <span className="navigation__link-text">{item.label}</span>
+            <span className="navigation__link-indicator" aria-hidden="true" />
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <nav className={cn('navigation', className)} aria-label="Main navigation">
@@ -35,32 +87,7 @@ export function Navigation({ items, className }: NavigationProps) {
         <span className={cn('navigation__hamburger-line', isOpen && 'is-open')} />
       </button>
 
-      <ul
-        id="nav-menu"
-        className={cn('navigation__list', isOpen && 'is-open')}
-        role="menubar"
-      >
-        {items.map((item, index) => (
-          <li key={item.href} role="none">
-            <Link
-              href={item.href}
-              className={cn(
-                'navigation__link',
-                activeIndex === index && 'is-active'
-              )}
-              role="menuitem"
-              onClick={closeMenu}
-              onFocus={() => setActiveIndex(index)}
-              onBlur={() => setActiveIndex(null)}
-              onMouseEnter={() => setActiveIndex(index)}
-              onMouseLeave={() => setActiveIndex(null)}
-            >
-              <span className="navigation__link-text">{item.label}</span>
-              <span className="navigation__link-indicator" aria-hidden="true" />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {mounted ? createPortal(menuOverlay, document.body) : menuOverlay}
 
       <style jsx>{`
         .navigation {
@@ -156,7 +183,7 @@ export function Navigation({ items, className }: NavigationProps) {
             opacity: 0;
             pointer-events: none;
             transition: opacity var(--duration-normal) var(--ease-out);
-            z-index: calc(var(--z-sticky) - 1);
+            z-index: var(--z-overlay);
           }
 
           .navigation__list.is-open {

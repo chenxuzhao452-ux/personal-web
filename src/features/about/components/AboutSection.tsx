@@ -111,6 +111,7 @@ export function AboutSection({ photoRef }: AboutSectionProps) {
         .about {
           padding: var(--section-padding-y) 0;
           min-height: 100vh;
+          min-height: 100dvh;
         }
 
         .about__grid {

@@ -45,13 +45,19 @@ export function ArticleList({ articles }: ArticleListProps) {
 
         .article-list__grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
           gap: var(--space-5);
         }
 
         @media (max-width: 768px) {
           .article-list__grid {
             grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .article-list__header {
+            text-align: center;
           }
         }
       `}</style>

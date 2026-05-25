@@ -68,6 +68,7 @@ export function HeroSection({ content }: HeroSectionProps) {
         .hero {
           position: relative;
           height: 100vh;
+          height: 100dvh;
           display: flex;
           align-items: center;
           overflow: hidden;
