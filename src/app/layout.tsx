@@ -7,6 +7,7 @@ import { MotionProvider } from '@/components/MotionProvider';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import { StructuredData } from '@/components/StructuredData';
+import { DynamicMetadata } from '@/components/DynamicMetadata';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -65,6 +66,7 @@ export default function RootLayout({
         <div className="noise-overlay" aria-hidden="true" />
         <ThemeProvider>
           <LanguageProvider>
+            <DynamicMetadata />
             <MotionProvider>
               <HeaderWrapper />
               {children}
