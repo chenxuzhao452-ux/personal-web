@@ -74,6 +74,12 @@ export function Header({ siteName, navItems }: HeaderProps) {
         .header__logo:hover .header__logo-text {
           text-shadow: 0 0 30px var(--color-accent-glow);
         }
+
+        @media (max-width: 768px) {
+          .header__logo-text {
+            font-size: 0.75em;
+          }
+        }
       `}</style>
     </header>
   );
