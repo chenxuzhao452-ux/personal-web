@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { CanvasWrapper } from './CanvasWrapper';
 import { ParticleLayer } from '@/features/hero/components/ParticleLayer';
@@ -11,10 +11,11 @@ interface BackgroundParticlesProps {
 
 export function BackgroundParticles({ avoidRef }: BackgroundParticlesProps) {
   const reducedMotion = useReducedMotion();
-  const [isMobile] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.innerWidth < 768;
-  });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   if (reducedMotion || isMobile) return null;
 
