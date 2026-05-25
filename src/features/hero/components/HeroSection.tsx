@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from '@/components/LanguageProvider';
 import { ParticleCanvas } from './ParticleCanvas';
 import { HeroHeading } from './HeroHeading';
 import { HeroCta } from './HeroCta';
@@ -11,6 +12,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ content }: HeroSectionProps) {
+  const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export function HeroSection({ content }: HeroSectionProps) {
       </div>
 
       <p className="hero__copyright mono-label">
-        &copy; {new Date().getFullYear()} Nebula Terminal. 用心构建。
+        &copy; {new Date().getFullYear()} {t('site.name')}. {t('footer.built')}
       </p>
 
       <style jsx>{`
