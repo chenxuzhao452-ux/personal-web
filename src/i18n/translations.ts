@@ -2,6 +2,8 @@ export type Lang = 'en' | 'zh' | 'ja' | 'tw';
 export type TranslationKey = keyof typeof EN;
 
 export const EN = {
+  'site.name': 'Nebula Terminal',
+
   'nav.home': 'Home',
   'nav.about': 'About',
   'nav.projects': 'Projects',
@@ -81,6 +83,8 @@ export const EN = {
 } as const;
 
 export const ZH: Record<TranslationKey, string> = {
+  'site.name': '星云终端',
+
   'nav.home': '首页',
   'nav.about': '关于',
   'nav.projects': '项目',
@@ -159,6 +163,8 @@ export const ZH: Record<TranslationKey, string> = {
 };
 
 export const JA: Record<TranslationKey, string> = {
+  'site.name': 'ネビュラターミナル',
+
   'nav.home': 'ホーム',
   'nav.about': '自己紹介',
   'nav.projects': 'プロジェクト',
@@ -237,6 +243,8 @@ export const JA: Record<TranslationKey, string> = {
 };
 
 export const TW: Record<TranslationKey, string> = {
+  'site.name': '星雲終端',
+
   'nav.home': '首頁',
   'nav.about': '關於',
   'nav.projects': '項目',
